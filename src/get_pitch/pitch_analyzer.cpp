@@ -12,6 +12,10 @@ namespace upc {
 
     for (unsigned int l = 0; l < r.size(); ++l) {
   		/// \TODO Compute the autocorrelation r[l]
+      float acc = 0;
+      for (unsigned int n = l; n < x.size(); ++n)
+        acc += x[n] * x[n-l];
+      r[l] = acc/ x.size(); //Normalitzem
     }
 
     if (r[0] == 0.0F) //to avoid log() and divide zero 
@@ -27,6 +31,8 @@ namespace upc {
     switch (win_type) {
     case HAMMING:
       /// \TODO Implement the Hamming window
+      for (unsigned int n = 0; n < frameLen; ++n)
+        window[n] = 0.54 - 0.46 * cos(2 * 3.141592 * n / (frameLen - 1));
       break;
     case RECT:
     default:

@@ -64,10 +64,24 @@ int main(int argc, const char *argv[]) {
   /// \TODO
   /// Preprocess the input signal in order to ease pitch estimation. For instance,
   /// central-clipping or low pass filtering may be used.
+  float threshold = 2 * std::median(x);
+
+  vector<float> clipped();
+  clipped=x;
+
+    for (size_t i = 0; i < x.size(); ++i) {
+    if (x[i] > threshold) {
+      clipped[i] = x[i] - threshold;
+    } else if (x[i] < -threshold) {
+      clipped[i] = x[i] + threshold;
+    } else {
+      clipped[i] = 0.0;
+    }
+  }
   
   // Iterate for each frame and save values in f0 vector
   vector<float>::iterator iX;
-  vector<float> f0;
+  vector<float> f0=clipped;
   for (iX = x.begin(); iX + n_len < x.end(); iX = iX + n_shift) {
     float f = analyzer(iX, iX + n_len);
     f0.push_back(f);
@@ -76,6 +90,15 @@ int main(int argc, const char *argv[]) {
   /// \TODO
   /// Postprocess the estimation in order to supress errors. For instance, a median filter
   /// or time-warping may be used.
+  vector<float> mediana;
+  mediana=f0;
+  mediana.begin()=f0.begin();
+  for (int i = 1; i < f0.size() - 1; i++) {
+    std::vector<float> values = {f0[i-1], f0[i], f0[i+1]};
+    std::sort(values.begin(), values.end());
+    mediana[i]=values[1];
+  }
+  mediana.end()=f0.end();
 
   // Write f0 contour into the output file
   ofstream os(output_txt);
