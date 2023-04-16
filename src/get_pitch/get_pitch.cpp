@@ -27,6 +27,10 @@ Usage:
 Options:
     -h, --help  Show this screen
     --version   Show the version of the project
+    -m REAL, --umaxacc=REAL   Umbral del màximo de la autocorrelación
+    -a REAL, --uacc=REAL   Segundo umbral autocorrelación
+    -p REAL, --upot=REAL   Umbral de potencia 
+
 
 Arguments:
     input-wav   Wave file with the audio signal
@@ -46,6 +50,9 @@ int main(int argc, const char *argv[]) {
 
 	std::string input_wav = args["<input-wav>"].asString();
 	std::string output_txt = args["<output-txt>"].asString();
+  float umaxacc = std::stof(args["--umaxacc"].asString());
+  float uacc = std::stof(args["--uacc"].asString());
+  float upot = std::stof(args["--upot"].asString());
 
   // Read input sound file
   unsigned int rate;
