@@ -27,9 +27,9 @@ Usage:
 Options:
     -h, --help  Show this screen
     --version   Show the version of the project
-    -m REAL, --umaxacc=REAL   Umbral del màximo de la autocorrelación
-    -a REAL, --uacc=REAL   Segundo umbral autocorrelación
-    -p REAL, --upot=REAL   Umbral de potencia 
+    -m REAL, --umaxacc=REAL   Umbral del màximo de la autocorrelación [default: 0.4]
+    -a REAL, --uacc=REAL   Segundo umbral autocorrelación [default: 0.3]
+    -p REAL, --upot=REAL   Umbral de potencia [default: -16]
 
 
 Arguments:
