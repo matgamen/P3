@@ -13,9 +13,10 @@ namespace upc {
     for (unsigned int l = 0; l < r.size(); ++l) {
   		/// \TODO Compute the autocorrelation r[l]
       float acc = 0;
-      for (unsigned int n = l; n < x.size(); ++n)
+      for (unsigned int n = l; n < x.size(); ++n){
         acc += x[n] * x[n-l];
-      r[l] = acc/ x.size(); //Normalitzem
+        r[l] = acc/ x.size(); //Normalitzem. Dubte, ha d'anar fora l'altre for?
+      }
     }
 
     if (r[0] == 0.0F) //to avoid log() and divide zero 
@@ -56,7 +57,9 @@ namespace upc {
     /// \TODO Implement a rule to decide whether the sound is voiced or not.
     /// * You can use the standard features (pot, r1norm, rmaxnorm),
     ///   or compute and use other ones.
-    if(rmaxnorm >= umaxacc && (r1norm >= uacc || pot >= upot)){ //Valores que pasamos por linea de comandos
+    //if(rmaxnorm >= urmax && (r1norm >= ur1 || pot >= upot)){ Valores que pasamos por linea de comandos
+    //if(rmaxnorm >= 0.7 && (r1norm >= 0.7 || pot>=-1e6)){
+    if(rmaxnorm > this->urmax && r1norm > this->ur1 && pot>this->upot){
       return false; //sonor
     }
     return true; //sord

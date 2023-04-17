@@ -27,10 +27,9 @@ Usage:
 Options:
     -h, --help  Show this screen
     --version   Show the version of the project
-    -m REAL, --umaxacc=REAL   Umbral del màximo de la autocorrelación [default: 0.4]
-    -a REAL, --uacc=REAL   Segundo umbral autocorrelación [default: 0.3]
-    -p REAL, --upot=REAL   Umbral de potencia [default: -16]
-
+    -p, --upot=REAL   Umbral de potencia para la detección de sonoro/sordo [default: -1e6]
+    -1, --ur1=REAL    Umbral de la autocorrelación de 1 para sonoro/sordo [default: 0.7]
+    -m, --urmax=REAL     Umbral del maximo de la autocorrelación [default: 0.4]
 
 Arguments:
     input-wav   Wave file with the audio signal
@@ -50,9 +49,9 @@ int main(int argc, const char *argv[]) {
 
 	std::string input_wav = args["<input-wav>"].asString();
 	std::string output_txt = args["<output-txt>"].asString();
-  float umaxacc = std::stof(args["--umaxacc"].asString());
-  float uacc = std::stof(args["--uacc"].asString());
-  float upot = std::stof(args["--upot"].asString());
+  float upot = stof(args["--upot"].asString());
+  float ur1 = stof(args["--ur1"].asString());
+  float urmax = stof(args["--urmax"].asString());
 
   // Read input sound file
   unsigned int rate;
@@ -66,14 +65,15 @@ int main(int argc, const char *argv[]) {
   int n_shift = rate * FRAME_SHIFT;
 
   // Define analyzer
-  PitchAnalyzer analyzer(n_len, rate, PitchAnalyzer::RECT, 50, 500);
+  PitchAnalyzer analyzer(n_len, rate, PitchAnalyzer::RECT, 50, 500, upot, ur1, urmax);
 
   /// \TODO
   /// Preprocess the input signal in order to ease pitch estimation. For instance,
   /// central-clipping or low pass filtering may be used.
-  float threshold = 2 * std::median(x);
+  /*auto max= *max_element(x.begin(), x.end());
+  float threshold = 0.03*max;
 
-  vector<float> clipped();
+  vector<float> clipped(x.size());
   clipped=x;
 
     for (size_t i = 0; i < x.size(); ++i) {
@@ -84,11 +84,11 @@ int main(int argc, const char *argv[]) {
     } else {
       clipped[i] = 0.0;
     }
-  }
+  }*/
   
   // Iterate for each frame and save values in f0 vector
   vector<float>::iterator iX;
-  vector<float> f0=clipped;
+  vector<float> f0;//f0=clipped;
   for (iX = x.begin(); iX + n_len < x.end(); iX = iX + n_shift) {
     float f = analyzer(iX, iX + n_len);
     f0.push_back(f);
@@ -97,6 +97,7 @@ int main(int argc, const char *argv[]) {
   /// \TODO
   /// Postprocess the estimation in order to supress errors. For instance, a median filter
   /// or time-warping may be used.
+  /*
   vector<float> mediana;
   mediana=f0;
   mediana.begin()=f0.begin();
@@ -106,6 +107,7 @@ int main(int argc, const char *argv[]) {
     mediana[i]=values[1];
   }
   mediana.end()=f0.end();
+  */
 
   // Write f0 contour into the output file
   ofstream os(output_txt);
