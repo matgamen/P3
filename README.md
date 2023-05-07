@@ -34,6 +34,8 @@ La següent imatge es l'output de l'¡arxiu plots.py
 
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
 
+![Descripción de la imagen](https://github.com/matgamen/P3/blob/Matamala-Sastre/sonor_sord.png)
+
    * Puede serle útil seguir las instrucciones contenidas en el documento adjunto `código.pdf`.
 
 - Una vez completados los puntos anteriores, dispondrá de una primera versión del estimador de pitch. El 
