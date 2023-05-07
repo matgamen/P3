@@ -18,7 +18,9 @@ namespace upc {
       for (unsigned int n = l; n < x.size(); ++n){
         acc += x[n] * x[n-l];
         r[l] = acc/ x.size(); //Normalitzem.
+
       }
+
     }
 
     if (r[0] == 0.0F) //to avoid log() and divide zero 
@@ -59,8 +61,7 @@ namespace upc {
     /// \TODO Implement a rule to decide whether the sound is voiced or not.
     /// * You can use the standard features (pot, r1norm, rmaxnorm),
     ///   or compute and use other ones.
-    //if(rmaxnorm >= urmax && (r1norm >= ur1 || pot >= upot)){ Valores que pasamos por linea de comandos
-    if(rmaxnorm > this->urmax && r1norm > this->ur1 && pot>this->upot){
+    if(rmaxnorm > this->urmax && (r1norm > this->ur1 || pot>this->upot)){
       return false; //sonor
     }
     return true; //sord

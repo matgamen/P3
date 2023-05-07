@@ -27,8 +27,8 @@ Usage:
 Options:
     -h, --help  Show this screen
     --version   Show the version of the project
-    -p, --upot=REAL   Umbral de potencia para la detección de sonoro/sordo [default: -1e6]
-    -1, --ur1=REAL    Umbral de la autocorrelación de 1 para sonoro/sordo [default: 0.7]
+    -p, --upot=REAL   Umbral de potencia para la detección de sonoro/sordo [default: -16]
+    -1, --ur1=REAL    Umbral de la autocorrelación de 1 para sonoro/sordo [default: 0.3]
     -m, --urmax=REAL     Umbral del maximo de la autocorrelación [default: 0.4]
 
 Arguments:
@@ -70,20 +70,17 @@ int main(int argc, const char *argv[]) {
   /// \TODO
   /// Preprocess the input signal in order to ease pitch estimation. For instance,
   /// central-clipping or low pass filtering may be used.
-  auto max= *max_element(x.begin(), x.end());
-  float threshold = 0.03*max;
+  /// fem servir el central clipping amb un threshold de 0.027*valor maxim de la senyal
+  float max = *std::max_element(x.begin(), x.end());
+  float threshold = 0.027*max;
 
   vector<float> clipped(x.size());
   clipped=x;
 
-    for (size_t i = 0; i < x.size(); ++i) {
-    if (x[i] > threshold) {
-      clipped[i] = x[i] - threshold;
-    } else if (x[i] < -threshold) {
-      clipped[i] = x[i] + threshold;
-    } else {
-      clipped[i] = 0.0;
-    }
+    for (long unsigned int i = 0; i < x.size(); ++i) {
+    if (abs(x[i]) < threshold) {
+      x[i] = 0;
+    } 
   }
   
   // Iterate for each frame and save values in f0 vector
@@ -97,17 +94,17 @@ int main(int argc, const char *argv[]) {
   /// \TODO
   /// Postprocess the estimation in order to supress errors. For instance, a median filter
   /// or time-warping may be used.
-  /*
+  /// optem per utilitzar el filtre de mediana
   vector<float> mediana;
   mediana=f0;
   mediana.begin()=f0.begin();
-  for (int i = 1; i < f0.size() - 1; i++) {
+  for (long unsigned int i = 1; i < f0.size() - 1; i++) {
     std::vector<float> values = {f0[i-1], f0[i], f0[i+1]};
     std::sort(values.begin(), values.end());
     mediana[i]=values[1];
   }
   mediana.end()=f0.end();
-  */
+  
 
   // Write f0 contour into the output file
   ofstream os(output_txt);
@@ -117,7 +114,7 @@ int main(int argc, const char *argv[]) {
   }
 
   os << 0 << '\n'; //pitch at t=0
-  for (iX = f0.begin(); iX != f0.end(); ++iX) 
+  for (iX = mediana.begin(); iX != mediana.end(); ++iX) 
     os << *iX << '\n';
   os << 0 << '\n';//pitch at t=Dur
 
