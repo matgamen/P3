@@ -14,6 +14,11 @@ Ejercicios básicos
   `get_pitch`.
 
    * Complete el cálculo de la autocorrelación e inserte a continuación el código correspondiente.
+   
+   	for (unsigned int n = l; n < x.size(); ++n){
+        	acc += x[n] * x[n-l];
+        	r[l] = acc/ x.size(); //Normalitzem
+      	}
 
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un segmento de
      unos 30 ms de un fonema sonoro y su periodo de pitch; y, en otro *subplot*, se vea con claridad la
