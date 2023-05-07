@@ -68,6 +68,12 @@ La següent imatge es l'output de l'¡arxiu plots.py
   * Optimice los parámetros de su sistema de estimación de pitch e inserte una tabla con las tasas de error
     y el *score* TOTAL proporcionados por `pitch_evaluate` en la evaluación de la base de datos 
 	`pitch_db/train`..
+	
+Fem servir upot = -16, ur1 = 0.3 i urmax = 0.4.
+Pel central clippin un llindar de valor 0.027*valor maxim de la senyal.
+I un filtre de mediana d'ordre 3.
+![Descripción de la imagen](https://github.com/matgamen/P3/blob/Matamala-Sastre/TOTAL.png)
+
 
 Ejercicios de ampliación
 ------------------------
