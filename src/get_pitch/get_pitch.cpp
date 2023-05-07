@@ -70,7 +70,7 @@ int main(int argc, const char *argv[]) {
   /// \TODO
   /// Preprocess the input signal in order to ease pitch estimation. For instance,
   /// central-clipping or low pass filtering may be used.
-  /*auto max= *max_element(x.begin(), x.end());
+  auto max= *max_element(x.begin(), x.end());
   float threshold = 0.03*max;
 
   vector<float> clipped(x.size());
@@ -84,7 +84,7 @@ int main(int argc, const char *argv[]) {
     } else {
       clipped[i] = 0.0;
     }
-  }*/
+  }
   
   // Iterate for each frame and save values in f0 vector
   vector<float>::iterator iX;
