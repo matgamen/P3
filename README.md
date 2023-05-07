@@ -15,10 +15,7 @@ Ejercicios básicos
 
    * Complete el cálculo de la autocorrelación e inserte a continuación el código correspondiente.
    
-   	for (unsigned int n = l; n < x.size(); ++n){
-        	acc += x[n] * x[n-l];
-        	r[l] = acc/ x.size(); //Normalitzem
-      	}
+![Descripción de la imagen](https://github.com/matgamen/P3/blob/Matamala-Sastre/autocorrelaci%C3%B3.png)
 
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un segmento de
      unos 30 ms de un fonema sonoro y su periodo de pitch; y, en otro *subplot*, se vea con claridad la
@@ -27,8 +24,11 @@ Ejercicios básicos
 	 NOTA: es más que probable que tenga que usar Python, Octave/MATLAB u otro programa semejante para
 	 hacerlo. Se valorará la utilización de la biblioteca matplotlib de Python.
 
+
    * Determine el mejor candidato para el periodo de pitch localizando el primer máximo secundario de la
      autocorrelación. Inserte a continuación el código correspondiente.
+
+![Descripción de la imagen](https://github.com/matgamen/P3/blob/Matamala-Sastre/iR%3DiRmax.png)
 
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
 
@@ -50,12 +50,16 @@ Ejercicios básicos
 	    Recuerde configurar los paneles de datos para que el desplazamiento de ventana sea el adecuado, que
 		en esta práctica es de 15 ms.
 
+![Descripción de la imagen](https://github.com/matgamen/P3/blob/Matamala-Sastre/pitch%20primera.png)
+
       - Use el estimador de pitch implementado en el programa `wavesurfer` en una señal de prueba y compare
 	    su resultado con el obtenido por la mejor versión de su propio sistema.  Inserte una gráfica
 		ilustrativa del resultado de ambos estimadores.
      
 		Aunque puede usar el propio Wavesurfer para obtener la representación, se valorará
 	 	el uso de alternativas de mayor calidad (particularmente Python).
+  
+![Descripción de la imagen](https://github.com/matgamen/P3/blob/Matamala-Sastre/pitch%20segona.png)
   
   * Optimice los parámetros de su sistema de estimación de pitch e inserte una tabla con las tasas de error
     y el *score* TOTAL proporcionados por `pitch_evaluate` en la evaluación de la base de datos 
