@@ -12,6 +12,12 @@ namespace upc {
 
     for (unsigned int l = 0; l < r.size(); ++l) {
   		/// \TODO Compute the autocorrelation r[l]
+      /// \TODO compute autocorrelacion
+      /// \DONE autocorrelacion calculada
+      /// - Inicializamos la autocorrelacion a 0
+      /// - Acumulamos los productos cruzados ~\sum_{n=0}^{N-1} 
+      /// - Dividimos por el número de muestras
+
       float acc = 0;
       for (unsigned int n = l; n < x.size(); ++n){
         acc += x[n] * x[n-l];
