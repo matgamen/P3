@@ -77,6 +77,8 @@ Ejercicios de ampliación
 
   * Inserte un *pantallazo* en el que se vea el mensaje de ayuda del programa y un ejemplo de utilización
     con los argumentos añadidos.
+    
+![Descripción de la imagen](https://github.com/matgamen/P3/blob/Matamala-Sastre/get_p%C3%ACtch.png)
 
 - Implemente las técnicas que considere oportunas para optimizar las prestaciones del sistema de estimación
   de pitch.
@@ -84,7 +86,15 @@ Ejercicios de ampliación
   Entre las posibles mejoras, puede escoger una o más de las siguientes:
 
   * Técnicas de preprocesado: filtrado paso bajo, diezmado, *center clipping*, etc.
+
+Utilitzem el central clipping:
+![Descripción de la imagen](https://github.com/matgamen/P3/blob/Matamala-Sastre/central_clipping.png)
+
   * Técnicas de postprocesado: filtro de mediana, *dynamic time warping*, etc.
+
+Utilitzem el filtre de mediana:
+![Descripción de la imagen](https://github.com/matgamen/P3/blob/Matamala-Sastre/Filtre_mediana.png)
+
   * Métodos alternativos a la autocorrelación: procesado cepstral, *average magnitude difference function*
     (AMDF), etc.
   * Optimización **demostrable** de los parámetros que gobiernan el estimador, en concreto, de los que
